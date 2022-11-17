@@ -17,10 +17,11 @@ class _MyFormPageState extends State<MyFormPage> {
     bool jenjangDiploma = false;
     bool jenjangMagister = false;
     bool jenjangDoktor = false;
+    bool _nilaiSwitch = false;
     double umur = 0;
     String kelasPBP = 'A';
     List<String> listKelasPBP = ['A', 'B', 'C', 'D', 'E', 'F', 'KI'];
-    bool _nilaiSwitch = false;
+
 
     @override
     Widget build(BuildContext context) {
@@ -28,84 +29,85 @@ class _MyFormPageState extends State<MyFormPage> {
             appBar: AppBar(
                 title: Text('Form'),
             ),
+            // Menambahkan drawer menu
             drawer: Drawer(
                 child: Column(
                     children: [
-                        // Adding clickable menu
-                        ListTile(
-                            title: const Text('Counter'),
-                            onTap: () {
-                                // Routing the menu to the main page
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => const MyHomePage()),
-                                );
-                            },
-                        ),
-                        ListTile(
-                            title: const Text('Form'),
-                            onTap: () {
-                                // Routing the menu to the form page
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => const MyFormPage()),
-                                );
-                            },
-                        ),
-                        ListTile(
-                            title: const Text('To Do'),
-                            onTap: () {
-                                // Route the menu to the to do page
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => const ToDoPage()),
-                                );
-                            },
-                        ),
+                    // Menambahkan clickable menu
+                    ListTile(
+                        title: const Text('Counter'),
+                        onTap: () {
+                        // Route menu ke halaman utama
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => const MyHomePage()),
+                        );
+                        },
+                    ),
+                    ListTile(
+                        title: const Text('Form'),
+                        onTap: () {
+                        // Route menu ke halaman form
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => const MyFormPage()),
+                        );
+                        },
+                    ),
+                    ListTile(
+                        title: const Text('To Do'),
+                        onTap: () {
+                            // Route menu ke halaman to do
+                            Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => const ToDoPage()),
+                            );
+                        },
+                    )
                     ],
                 ),
             ),
             body: Form(
                 key: _formKey,
                 child: SingleChildScrollView(
-                    child: Container(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Column(
-                            children: [
+                      child: Container(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Column(
+                          children: [
                                 Padding(
-                                    // Menggunakan padding sebesar 8 pixels
+                                  // Menggunakan padding sebesar 8 pixels
                                     padding: const EdgeInsets.all(8.0),
                                     child: TextFormField(
                                         decoration: InputDecoration(
-                                            hintText: "Contoh: Alia Widyanita Puspaningrum",
-                                            labelText: "Nama Lengkap",
-                                            // Menambahkan icon agar lebih intuitif
-                                            icon: const Icon(Icons.people),
-                                            // Menambahkan circular border agar lebih rapi
-                                            border: OutlineInputBorder(
-                                                borderRadius: BorderRadius.circular(5.0),
-                                            ),
-                                        ),
-                                        // Menambahkan behavior saat nama diketik 
-                                        onChanged: (String? value) {
-                                            setState(() {
-                                                _namaLengkap = value!;
-                                            });
-                                        },
-                                        // Menambahkan behavior saat data disimpan
-                                        onSaved: (String? value) {
-                                            setState(() {
-                                                _namaLengkap = value!;
-                                            });
-                                        },
-                                        // Validator sebagai validasi form
-                                        validator: (String? value) {
-                                            if (value == null || value.isEmpty) {
-                                                return 'Nama lengkap tidak boleh kosong!';
-                                            }
-                                            return null;
-                                        },
-                                    ),
+                                          hintText: "Contoh: Syifa Afra Kamila Mumtaz",
+                                          labelText: "Nama Lengkap",
+                                          // Menambahkan icon agar lebih intuitif
+                                          icon: const Icon(Icons.people),
+                                          // Menambahkan circular border agar lebih rapi
+                                          border: OutlineInputBorder(
+                                              borderRadius: BorderRadius.circular(5.0),
+                                          ),
+                                      ),
+                                      // Menambahkan behavior saat nama diketik
+                                      onChanged: (String? value) {
+                                          setState(() {
+                                              _namaLengkap = value!;
+                                          });
+                                      },
+                                      // Menambahkan behavior saat data disimpan
+                                      onSaved: (String? value) {
+                                          setState(() {
+                                              _namaLengkap = value!;
+                                          });
+                                      },
+                                      // Validator sebagai validasi form
+                                      validator: (String? value) {
+                                          if (value == null || value.isEmpty) {
+                                              return 'Nama lengkap tidak boleh kosong!';
+                                          }
+                                          return null;
+                                      },
+                                  ),
                                 ),
                                 Container(
                                     margin: const EdgeInsets.all(8),
@@ -124,72 +126,73 @@ class _MyFormPageState extends State<MyFormPage> {
                                             title: const Text('Sarjana'),
                                             value: jenjangSarjana,
                                             onChanged: (bool? value) {
-                                                setState(() {
-                                                    jenjangSarjana = value!;
-                                                    if (value){
-                                                        jenjangMagister = jenjangDiploma = jenjangDoktor = false;
-                                                    }
-                                                });
+                                            setState(() {
+                                                jenjangSarjana = value!;
+                                                if (value){
+                                                    jenjangMagister = jenjangDiploma = jenjangDoktor = false;
+                                                }
+                                            });
                                             },
                                         ),
                                         CheckboxListTile(
                                             title: const Text('Diploma'),
                                             value: jenjangDiploma,
                                             onChanged: (bool? value) {
-                                                setState(() {
-                                                    jenjangDiploma = value!;
-                                                    if (value){
-                                                        jenjangMagister = jenjangSarjana = jenjangDoktor = false;
-                                                    }
-                                                });
+                                            setState(() {
+                                                jenjangDiploma = value!;
+                                                if (value){
+                                                    jenjangMagister = jenjangSarjana = jenjangDoktor = false;
+                                                }
+                                            });
                                             },
                                         ),
                                         CheckboxListTile(
                                             title: const Text('Magister'),
                                             value: jenjangMagister,
                                             onChanged: (bool? value) {
-                                                setState(() {
-                                                    jenjangMagister = value!;
-                                                    if (value){
-                                                        jenjangDiploma = jenjangSarjana = jenjangDoktor = false;
-                                                    }
-                                                });
+                                            setState(() {
+                                                jenjangMagister = value!;
+                                                if (value){
+                                                    jenjangDiploma = jenjangSarjana = jenjangDoktor = false;
+                                                }
+                                            });
                                             },
                                         ),
                                         CheckboxListTile(
                                             title: const Text('Doktor'),
                                             value: jenjangDoktor,
                                             onChanged: (bool? value) {
-                                                setState(() {
-                                                    jenjangDoktor = value!;
-                                                    if (value){
-                                                        jenjangMagister = jenjangSarjana = jenjangDiploma = false;
-                                                    }
-                                                });
-                                            },
-                                        ),
-                                    ],
-                                    ),
-                                ),
-                                ListTile(
-                                    leading: const Icon(Icons.co_present),
-                                    title: Row(
-                                        children: [
-                                            Text('Umur: ${umur.round()}'),
+                                            setState(() {
+                                                jenjangDoktor = value!;
+                                                if (value){
+                                                    jenjangMagister = jenjangSarjana = jenjangDiploma = false;
+                                                }
+                                            });
+                                            },),
                                         ],
                                     ),
-                                    subtitle: Slider(
-                                        value: umur,
-                                        max: 100,
-                                        divisions: 100,
-                                        label: umur.round().toString(),
-                                        onChanged: (double value) {
-                                            setState(() {
-                                                umur = value;
-                                            });
-                                        },
-                                    ),
                                 ),
+
+                                ListTile(
+                                leading: const Icon(Icons.co_present),
+                                title: Row(
+                                    children: [
+                                    Text('Umur: ${umur.round()}'),
+                                    ],
+                                ),
+                                subtitle: Slider(
+                                    value: umur,
+                                    max: 100,
+                                    divisions: 100,
+                                    label: umur.round().toString(),
+                                    onChanged: (double value) {
+                                    setState(() {
+                                        umur = value;
+                                    });
+                                    },
+                                ),
+                                ),
+
                                 ListTile(
                                     leading: const Icon(Icons.class_),
                                     title: const Text(
@@ -199,18 +202,19 @@ class _MyFormPageState extends State<MyFormPage> {
                                         value: kelasPBP,
                                         icon: const Icon(Icons.keyboard_arrow_down),
                                         items: listKelasPBP.map((String items) {
-                                            return DropdownMenuItem(
-                                                value: items,
-                                                child: Text(items),
-                                            );
+                                        return DropdownMenuItem(
+                                            value: items,
+                                            child: Text(items),
+                                        );
                                         }).toList(),
                                         onChanged: (String? newValue) {
-                                            setState(() {
-                                                kelasPBP = newValue!;
-                                            });
+                                        setState(() {
+                                            kelasPBP = newValue!;
+                                        });
                                         },
                                     ),
                                 ),
+
                                 SwitchListTile(
                                     title: const Text('Practice Mode'),
                                     value: _nilaiSwitch,
@@ -221,57 +225,56 @@ class _MyFormPageState extends State<MyFormPage> {
                                     },
                                     secondary: const Icon(Icons.run_circle_outlined),
                                 ),
+
                                 TextButton(
                                     child: const Text(
-                                        "Simpan",
-                                        style: TextStyle(color: Colors.white),
+                                    "Simpan",
+                                    style: TextStyle(color: Colors.white),
                                     ),
                                     style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all(Colors.blue),
+                                    backgroundColor: MaterialStateProperty.all(Colors.blue),
                                     ),
+
                                     onPressed: () {
                                         if (_formKey.currentState!.validate()) {
-                                            showDialog(
-                                                context: context,
-                                                builder: (context) {
-                                                return Dialog(
-                                                    shape: RoundedRectangleBorder(
-                                                        borderRadius: BorderRadius.circular(10),
+                                        showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                            return Dialog(
+                                                shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(10),
+                                                ),
+                                                elevation: 15,
+                                                child: Container(
+                                                child: ListView(
+                                                    padding: const EdgeInsets.only(top: 20, bottom: 20, left:10, right:10),
+                                                    shrinkWrap: true,
+                                                    children: <Widget>[
+                                                    Center(child: const Text('Informasi Data')),
+                                                    SizedBox(height: 20),
+                                                    Text("Nama Lengkap: $_namaLengkap"),
+                                                    Text(
+                                                        "Jenjang Pendidikan: ${jenjangDoktor ? "Doktor" : jenjangMagister ? "Magister" : jenjangSarjana ? "Sarjana" : jenjangDiploma ? "Diploma" : "None"}",
                                                     ),
-                                                    elevation: 15,
-                                                    child: Container(
-                                                        child: ListView(
-                                                            padding: const EdgeInsets.only(top: 20, bottom: 20),
-                                                            shrinkWrap: true,
-                                                            children: <Widget>[
-                                                            Center(
-                                                                child: Column(
-                                                                    children: [
-                                                                    Text('Nama: ' + _namaLengkap),
-                                                                    Text('Umur: ' + umur.toString()),
-                                                                    Text('Kelas: ' + kelasPBP),
-                                                                    ],
-                                                                ),
-                                                            ),
-                                                            SizedBox(height: 20),
-                                                            // TODO: Munculkan informasi yang didapat dari form
-                                                            TextButton(
-                                                                onPressed: () {
-                                                                    Navigator.pop(context);
-                                                                },
-                                                                child: Text('Kembali'),
-                                                            ), 
-                                                            ],
-                                                        ),
+                                                    Text("Umur: $umur"),
+                                                    Text("Kelas PBP: $kelasPBP"),
+                                                    Text("Practice Mode: $_nilaiSwitch"),
+                                                    TextButton(
+                                                        onPressed: () {
+                                                        Navigator.pop(context);
+                                                        },
+                                                        child: Text('Kembali'),
                                                     ),
-                                                );
-                                                },
+                                                    ],
+                                                ),
+                                                ),
                                             );
+                                            });
                                         }
                                     },
                                 ),
                             ],
-                        ),
+                        ),   
                     ),
                 ),
             ),
